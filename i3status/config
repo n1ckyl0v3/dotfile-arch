@@ -1,0 +1,66 @@
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 5
+}
+
+order += "disk /"
+order += "ethernet eth0"
+order += "battery 0"
+order += "cpu_temperature 0"
+order += "memory"
+order += "volume master"
+order += "time"
+order += "wireless wlp0s20f3"
+
+wireless wlp0s20f3 {
+        format_up = "  %essid, %bitrate %ip"
+        format_down = "󰖪 down wireless"
+}
+
+ethernet eth0 {
+        format_up = "Ethenal: %ip (%speed)"
+        format_down = "Ethenal: down"
+}
+
+battery 0 {
+        format = "%status %percentage %remaining"
+        format_down = "No battery"
+        status_chr = "⚡ CHR"
+        status_bat = "🔋 BAT"
+        status_unk = "? UNK"
+        status_full = "☻ FULL"
+        path = "/sys/class/power_supply/BAT1/uevent"
+        low_threshold = 10
+}
+
+
+time {
+        format = "󰥔  %Y-%m-%d %H:%M:%S"
+}
+
+
+
+cpu_temperature 0 {
+        format = "󰏈  Cpu temp: %degrees °C"
+        path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+memory {
+        format = "󰍛 Memory %used"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
+}
+
+disk "/" {
+        format = "Disk free: %free"
+}
+
+volume master {
+	format = " Volume: %volume"
+        format_muted = " Volume: muted (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
